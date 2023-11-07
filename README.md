@@ -2,7 +2,7 @@
 
 [AUTHORS] (https://github.com/WambuaJoe/AirBnB_clone)
 
-The first project of the AirBnB project is to build a command line interface that acts as the fronted for the web application. This projects serves as an enrichment exercise to implement & improve concepts of higher-level programming & in this specific one we're building a command interpreter that manages the functions & features of the project.
+<p>The first project of the AirBnB project is to build a command line interface that acts as the fronted for the web application. This projects serves as an enrichment exercise to implement & improve concepts of higher-level programming & in this specific one we're building a command interpreter that manages the functions & features of the project.</p>
 
 Project Requirements
 - creating a Python package
