@@ -1,4 +1,4 @@
-AirBnB clone - The console
+<h2>The console</h2>
 
 [AUTHORS] (https://github.com/WambuaJoe/AirBnB_clone)
 
