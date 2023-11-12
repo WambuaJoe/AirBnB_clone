@@ -2,13 +2,16 @@
 """BaseModel module"""
 from uuid import uuid4
 from datetime import datetime
+from models.engine.file_storage import FileStorage
 
 
 class BaseModel:
     """create a BaseModel class"""
     def __init__(self, *args, **kwargs):
         """initialize parameters"""
-        
+        self.id = str(uuid4())
+        self.created_at = datetime.now()
+        self.update_at = datetime.now()
 
         if kwargs is not None and kwargs != {}:
             for key in kwargs:
@@ -22,9 +25,7 @@ class BaseModel:
                 else:
                     self.__dict__[key] = kwargs[key]
         else:
-            self.id = str(uuid4())
-            self.created_at = datetime.now()
-            self.update_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """print human-readable output"""
@@ -34,6 +35,7 @@ class BaseModel:
     def save(self):
         """update current datetime"""
         self.update_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """return key-value pairs of __dict__"""
