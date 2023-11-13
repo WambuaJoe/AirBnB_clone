@@ -28,20 +28,22 @@ class FileStorage:
             json.dump(pyObj, file)
 
     def classes(self):
-        """return dict of valid classes with their references"""
+        """return dict of valid classes and their references"""
         from models.base_model import BaseModel
 
-        classes = {"BaseModel": BaseModel}
+        classes = {
+            'BaseModel': BaseModel
+        }
         return classes
 
     def reload(self):
         """deserialize JSON file to object"""
-        try:
-            with open(FileStorage.__file_path, 'r', encoding='utf-8') as file:
-                obj_dict = json.load(file)
-                obj_dict = {key: self.classes()
-                [value["__class__"]](**value)
-                for key, value in obj_dict.items}
-                FileStorage.__objects = obj_dict
-        except FileNotFoundError:
-            pass
+        if not os.path.isfile(FileStorage.__file_path):
+            return    
+        # temp_dict = {}
+        with open(FileStorage.__file_path, 'r', encoding='utf-8') as file:
+            temp_dict = json.load(file)
+            temp_dict = {key: self.classes()[value["__class__"]](**value)
+                         for key, value in temp_dict.items()}
+            FileStorage.__objects = temp_dict
+        
