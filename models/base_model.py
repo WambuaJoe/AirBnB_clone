@@ -8,15 +8,15 @@ class BaseModel:
     """BaseModel class"""
     def __init__(self):
         """initialize attributes"""
-        self.id = uuid4()
+        self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
     def __str__(self):
         """print human-readable output"""
         # [<class name>] (<self.id>) <self.__dict__>
-        return "[{}] ({}) {}".format(type(self).__name__, self.id,
-                                     self.__dict__)
+        return "[{}] ({}) {}".\
+            format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """update attribute with current datetime"""
