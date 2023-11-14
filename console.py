@@ -24,8 +24,8 @@ Type 'help' or ? to show more details\n"
 
     def do_EOF(self, line):
         """End-Of-File command to exit shell"""
-        return True
         print()
+        return True
 
     def help_EOF(self):
         """help output for the EOF cmd"""
