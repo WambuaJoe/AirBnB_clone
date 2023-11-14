@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """FileStorage module"""
-import os
+from os import path
 import json
 import datetime
 
@@ -12,7 +12,7 @@ class FileStorage:
 
     def all(self):
         """return object dictionary"""
-        return FileStorage.__object
+        return FileStorage.__objects
 
     def new(self, obj):
         """set new object using key"""
@@ -22,9 +22,12 @@ class FileStorage:
 
     def save(self):
         """serialize object to JSON file"""
+        save_to_dict = {}
+        for key, value in FileStorage.__objects.items():
+            save_to_dict[key] = value.to_dict()
+
         with open(FileStorage.__file_path, 'w', encoding='utf-8') as file:
-            pyObj = {key: value.to_dict for key, value in FileStorage.__objects.items()}
-            json.dump(pyObj, file)
+            file.write(json.dumps(save_to_dict))
 
     def classes(self):
         """return dict of valid classes & their representation"""
@@ -36,10 +39,10 @@ class FileStorage:
 
     def reload(self):
         """deserialize JSON file to python object ONLY if file is found"""
-        if not os.path.isfile(FileStorage.__file_path):
-            return
-        with open(FileStorage.__file_path, 'r', encoding='utf-8') as file:
-            obj_dict = json.load(file)
-            obj_dict = {key: self.classes()[value['__class__']](**value)
-                        for key, value in obj_dict.items()}
-            FileStorage.__objects = obj_dict
+        if path.exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path, 'r', encoding='utf-8') as file:
+                reload_dict = json.loads(file.read())
+                for obj in reload_dict.values():
+                    self.new(eval(obj['__class__'])(**obj))
+        else:
+            pass
