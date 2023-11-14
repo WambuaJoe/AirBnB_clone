@@ -20,6 +20,30 @@ class HBNBCommand(cmd.Cmd):
         """overwrite emptyline method"""
         return False
 
+    def do_create(self, args):
+        """create class instance & save to JSON file"""
+        pass
+
+    def do_show(self, args):
+        """print string representation of instance based on
+        class name & id
+        """
+        pass
+
+    def do_destroy(self, args):
+        """delete instance & save change to JSON file"""
+        pass
+
+    def do_all(self, args):
+        """print string representation of all instances based on
+        or not on the same class
+        """
+        pass
+
+    def do_update(self, args):
+        """update instance & save change to JSON file"""
+        pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
