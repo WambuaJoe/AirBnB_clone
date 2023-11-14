@@ -13,15 +13,25 @@ Type 'help' or ? to show more details\n"
     intro = f"{msg}"
     prompt = "(hbnb) "
 
+    def do_EOF(self, line):
+        """End-Of-File command to exit shell"""
+        return True
+        print()
+
+    def help_EOF(self):
+        """help output for the EOF cmd"""
+        print("Exiting the shell when Ctrl+D is invoked")
+        print()
+
     def do_quit(self, line):
         """quit command that exits the program"""
-        print("Quitting...")
         return True
+        print()
 
-    def do_EOF(self, line):
-        """exit shell by pressing Ctrl+D"""
-        print("Exiting the shell...")
-        return True
+    def help_quit(self):
+        """help output for the quit command"""
+        print("Quit program")
+        print()
 
 
 if __name__ == "__main__":
