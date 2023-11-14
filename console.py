@@ -13,6 +13,15 @@ Type 'help' or ? to show more details\n"
     intro = f"{msg}"
     prompt = "(hbnb) "
 
+    def do_emptyline(self):
+        """does nothing when no command is passed to interpreter"""
+        pass
+
+    def help_emptyline(self):
+        """help output for emptyline command"""
+        print("No execution when nothing is entered")
+        print()
+
     def do_EOF(self, line):
         """End-Of-File command to exit shell"""
         return True
