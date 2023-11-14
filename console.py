@@ -12,7 +12,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, args):
         """EOF signal that exits the program when Ctrl-D is invoked"""
-        print()
+        print("")
         return True
 
 if __name__ == '__main__':
