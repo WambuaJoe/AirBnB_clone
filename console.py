@@ -39,7 +39,7 @@ Type 'help' or ? to show more details\n"
 
     def help_quit(self):
         """help output for the quit command"""
-        print("Quit program")
+        print("Quit command that exits the program")
         print()
 
 
