@@ -36,13 +36,14 @@ class FileStorage:
         classes = {
             'BaseModel': BaseModel
         }
+        return classes
 
     def reload(self):
         """deserialize JSON file to python object ONLY if file is found"""
         if path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, 'r', encoding='utf-8') as file:
-                reload_dict = json.loads(file.read())
-                for obj in reload_dict.values():
-                    self.new(eval(obj['__class__'])(**obj))
+                obj_dict = json.load(file)
+                for key, value in obj_dict.items():
+                    self.all()[key] = self.classes[value['__class__']](**value)
         else:
             pass

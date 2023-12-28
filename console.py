@@ -1,11 +1,17 @@
 #!/usr/bin/python3
 """Console Module"""
+
 import cmd
+from models import storage
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
     """Console class"""
     prompt = "(hbnb) "
+    __classes = {
+    "BaseModel"
+}
 
     def do_quit(self, args):
         """Quit command that exits the program"""
@@ -22,7 +28,15 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """create class instance & save to JSON file"""
-        pass
+        arg = args.split()
+        if len(arg) == 0:
+            print("** class name missing **")
+        #   return False
+        elif arg[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        else:
+            print(eval(arg[0]().id))
+            storage.save()
 
     def do_show(self, args):
         """print string representation of instance based on
